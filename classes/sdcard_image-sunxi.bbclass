@@ -70,10 +70,21 @@ IMAGE_CMD_sunxi-sdimg () {
 	
 	echo "COPY DEVICE TREE" >> /home/fanning/Desktop/fuck.txt
 	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/sun8i-v3s-licheepi-zero.dtb ::sun8i-v3s-licheepi-zero.dtb
+	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/sun8i-v3s-licheepi-zero-dock.dtb ::sun8i-v3s-licheepi-zero-dock.dtb
 
 	if [ -e "${DEPLOY_DIR_IMAGE}/u-boot.bin" ]
 	then
-		mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/u-boot.bin ::u-boot-sunxi-with-spl.bin
+		mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/u-boot.bin ::u-boot.bin
+	fi
+	
+	if [ -e "${DEPLOY_DIR_IMAGE}/boot.scr" ]
+	then
+		mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/boot.scr ::
+		echo "Co file boot.scr" >> /home/fanning/Desktop/fuck.txt
+	else
+		echo "Please run command: bitbake v3s-u-boot-scr"
+		echo "Deo Co file boot.scr" >> /home/fanning/Desktop/fuck.txt
+		bbfatal "Please run command: bitbake v3s-u-boot-scr"
 	fi
 
 	# Add stamp file
@@ -91,7 +102,8 @@ IMAGE_CMD_sunxi-sdimg () {
 	fi
 
 	# write u-boot-spl at the begining of sdcard in one shot
-	dd if=${DEPLOY_DIR_IMAGE}/u-boot.bin of=${SDIMG} bs=1024 seek=8 conv=notrunc
+	SPL_FILE=$(basename ${SPL_BINARY})
+	dd if=${DEPLOY_DIR_IMAGE}/${SPL_FILE} of=${SDIMG} bs=1024 seek=8 conv=notrunc
 }
 
 # write uboot.itb for arm64 boards
