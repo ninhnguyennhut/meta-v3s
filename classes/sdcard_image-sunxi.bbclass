@@ -20,7 +20,7 @@ IMAGE_TYPEDEP_sunxi-sdimg = "${SDIMG_ROOTFS_TYPE}"
 BOOTDD_VOLUME_ID ?= "${MACHINE}"
 
 # Boot partition size [in KiB]
-BOOT_SPACE ?= "5120"
+BOOT_SPACE ?= "8192"
 
 # First partition begin at sector 2048 : 2048*1024 = 2097152
 IMAGE_ROOTFS_ALIGNMENT = "2048"
@@ -65,10 +65,15 @@ IMAGE_CMD_sunxi-sdimg () {
 	mkfs.vfat -n "${BOOTDD_VOLUME_ID}" -S 512 -C ${WORKDIR}/boot.img $BOOT_BLOCKS
 
 	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin ::${KERNEL_IMAGETYPE}
+	
+	# Copy device tree file
+	
+	echo "COPY DEVICE TREE" >> /home/fanning/Desktop/fuck.txt
+	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/sun8i-v3s-licheepi-zero.dtb ::sun8i-v3s-licheepi-zero.dtb
 
 	if [ -e "${DEPLOY_DIR_IMAGE}/u-boot.bin" ]
 	then
-		mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/u-boot.bin ::
+		mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/u-boot.bin ::u-boot-sunxi-with-spl.bin
 	fi
 
 	# Add stamp file
@@ -86,8 +91,7 @@ IMAGE_CMD_sunxi-sdimg () {
 	fi
 
 	# write u-boot-spl at the begining of sdcard in one shot
-	#SPL_FILE=$(basename ${SPL_BINARY})
-	#dd if=${DEPLOY_DIR_IMAGE}/${SPL_FILE} of=${SDIMG} bs=1024 seek=8 conv=notrunc
+	dd if=${DEPLOY_DIR_IMAGE}/u-boot.bin of=${SDIMG} bs=1024 seek=8 conv=notrunc
 }
 
 # write uboot.itb for arm64 boards

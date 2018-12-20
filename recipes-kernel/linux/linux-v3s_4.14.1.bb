@@ -5,7 +5,7 @@ KERNEL_IMAGETYPE = "zImage"
 
 COMPATIBLE_MACHINE = "(v3s)"
 
-KERNEL_DEVICETREE ?= " \
+KERNEL_DEVICETREE = " \
     sun8i-v3s-licheepi-zero.dtb \
 "
 
