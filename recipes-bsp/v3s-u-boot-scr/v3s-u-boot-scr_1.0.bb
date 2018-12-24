@@ -19,6 +19,7 @@ do_compile() {
 inherit deploy nopackages
 
 do_deploy() {
+    echo "${DEPLOYDIR}" >> /home/fanning/haha.txt
     install -d ${DEPLOYDIR}
     install -m 0644 boot.scr ${DEPLOYDIR}
 }

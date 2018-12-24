@@ -20,7 +20,7 @@ IMAGE_TYPEDEP_sunxi-sdimg = "${SDIMG_ROOTFS_TYPE}"
 BOOTDD_VOLUME_ID ?= "${MACHINE}"
 
 # Boot partition size [in KiB]
-BOOT_SPACE ?= "5120"
+BOOT_SPACE ?= "6144"
 
 #FANNING_ROOTFS_SIZE = "50000"
 
@@ -78,7 +78,7 @@ IMAGE_CMD_sunxi-sdimg () {
 	# Copy device tree file
 	
 	echo "COPY DEVICE TREE" >> /home/fanning/Desktop/fuck.txt
-	#mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/sun8i-v3s-licheepi-zero.dtb ::sun8i-v3s-licheepi-zero.dtb
+	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/sun8i-v3s-licheepi-zero.dtb ::sun8i-v3s-licheepi-zero.dtb
 	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/sun8i-v3s-licheepi-zero-dock.dtb ::sun8i-v3s-licheepi-zero-dock.dtb
 
 	if [ -e "${DEPLOY_DIR_IMAGE}/u-boot.bin" ]
