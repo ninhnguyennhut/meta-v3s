@@ -57,6 +57,7 @@ DEV_SDK_INSTALL = " \
     python-modules \
     python3-modules \
     strace \
+    mtd-utils \
 "
 
 DEV_EXTRAS = " \
