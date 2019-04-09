@@ -45,7 +45,7 @@
 #include "sunxi-common-regulators.dtsi"
 
 / {
-	model = "Lichee Pi Zero";
+	model = "IoT development Board";
 	compatible = "licheepi,licheepi-zero", "allwinner,sun8i-v3s";
 
 	aliases {
@@ -108,7 +108,9 @@
 	status = "okay";
 };
 
-&ehci0 {
+&uart0 {
+	pinctrl-0 = <&uart0_pins_a>;
+	pinctrl-names = "default";
 	status = "okay";
 };
 

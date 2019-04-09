@@ -123,3 +123,4 @@ IMAGE_CMD_sunxi-sdimg_append_sun50i () {
 		dd if=${DEPLOY_DIR_IMAGE}/${UBOOT_BINARY} of=${SDIMG} bs=1024 seek=40 conv=notrunc
 	fi
 }
+
