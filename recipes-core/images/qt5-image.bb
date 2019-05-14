@@ -4,18 +4,50 @@ HOMEPAGE = "http://www.jumpnowtek.com"
 require console-image.bb
 
 QT_DEV_TOOLS = " \
-    qtbase-dev \
-    qtbase-mkspecs \
-    qtbase-tools \
-    qtserialport-dev \
-    qtserialport-mkspecs \
+#DISTRO = "v3s-tiny"
+#DISTRO = "fanning-tiny"
+#LINUX_KERNEL_TYPE = "tiny"
 "
 
 QT_TOOLS = " \
-    qtbase \
-    qtbase-plugins \
-    qtserialport \
-    qt5-env \
+qtbase \
+qtbase-plugins \
+qtserialport \
+qt5-env \
+qtbase-dev \
+qtbase-mkspecs \
+qtbase-tools \
+qtserialport-dev \
+qtserialport-mkspecs \
+qtdeclarative \
+qtdeclarative-tools \
+qtdeclarative-mkspecs \
+qtdeclarative-qmlplugins \
+qttranslations-qtdeclarative \
+qtmultimedia \
+qtmultimedia-plugins \
+qtsvg \
+qtsvg-plugins \
+qtsensors \
+qtimageformats-plugins \
+qtsystems \
+qtsystems-tools \
+qtsystems-qmlplugins \
+qtscript \
+qtwebkit \
+qtwebkit-qmlplugins \
+qtconnectivity-dev \
+qtconnectivity-mkspecs \
+qtconnectivity-qmlplugins \
+qtlocation-plugins \
+qtlocation-qmlplugins \
+qtquickcontrols-qmlplugins \
+qtxmlpatterns-dev \
+qtxmlpatterns-mkspecs \
+qttranslations-qtxmlpatterns \
+qtquickcontrols2 \
+qtquickcontrols2-dev \
+qtquickcontrols2-mkspecs \
 "
 
 FONTS = " \
