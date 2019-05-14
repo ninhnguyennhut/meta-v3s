@@ -4,9 +4,6 @@ HOMEPAGE = "http://www.jumpnowtek.com"
 require console-image.bb
 
 QT_DEV_TOOLS = " \
-#DISTRO = "v3s-tiny"
-#DISTRO = "fanning-tiny"
-#LINUX_KERNEL_TYPE = "tiny"
 "
 
 QT_TOOLS = " \
