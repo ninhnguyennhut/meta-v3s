@@ -1,3 +1,4 @@
+PREFERRED_PROVIDER_virtual/libgbm ?= "mesa-gl"
 PREFERRED_PROVIDER_virtual/mesa ?= "mesa-gl"
 PREFERRED_PROVIDER_virtual/libgl ?= "mesa-gl"
 PREFERRED_PROVIDER_virtual/libgles1 ?= "sunxi-mali"
