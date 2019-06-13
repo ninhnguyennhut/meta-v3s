@@ -22,7 +22,7 @@ python __anonymous() {
 }
 
 SRCREV_pn-${PN} = "d343311efc8db166d8371b28494f0f27b6a58724"
-SRC_URI = "gitsm://github.com/linux-sunxi/sunxi-mali.git \
+SRC_URI = "gitsm://github.com/ninhnguyennhut/sunxi-mali.git \
            file://0001-Add-EGLSyncKHR-EGLTimeKHR-and-GLChar-definition.patch \
            file://0002-Add-missing-GLchar-definition.patch \
            file://0003-Fix-sed-to-replace-by-the-correct-var.patch \
@@ -46,6 +46,9 @@ do_configure() {
          DESTDIR=${D}/ VERSION=r3p0 ABI=armhf make ${EXTRA_OEMAKE} config
 }
 
+#install -d -m 0755 ${D}${includedir}/KHR
+#install -m 0755 ${S}/include/KHR/*.h ${D}${includedir}/KHR/
+
 do_install() {
     make -f Makefile.pc
 
@@ -56,8 +59,6 @@ do_install() {
     install -m 0755 ${S}/include/GLES/*.h ${D}${includedir}/GLES/
     install -d -m 0755 ${D}${includedir}/GLES2
     install -m 0755 ${S}/include/GLES2/*.h ${D}${includedir}/GLES2/
-    install -d -m 0755 ${D}${includedir}/KHR
-    install -m 0755 ${S}/include/KHR/*.h ${D}${includedir}/KHR/
 
     # Copy the .pc files
     install -d -m 0755 ${D}${libdir}/pkgconfig

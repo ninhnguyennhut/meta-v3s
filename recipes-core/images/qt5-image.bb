@@ -31,8 +31,6 @@ qtsystems \
 qtsystems-tools \
 qtsystems-qmlplugins \
 qtscript \
-qtwebkit \
-qtwebkit-qmlplugins \
 qtconnectivity-dev \
 qtconnectivity-mkspecs \
 qtconnectivity-qmlplugins \
