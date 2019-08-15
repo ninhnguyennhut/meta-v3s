@@ -29,7 +29,9 @@ IMAGE_ROOTFS_ALIGNMENT = "2048"
 
 # Use an uncompressed ext4 by default as rootfs
 SDIMG_ROOTFS_TYPE ?= "ext4"
+ZIP_ROOTFS_TYPE = "tar.xz"
 SDIMG_ROOTFS = "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.${SDIMG_ROOTFS_TYPE}"
+NORFLASH_ROOTFS = "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.${ZIP_ROOTFS_TYPE}"
 
 do_image_sunxi_sdimg[depends] += " \
 			parted-native:do_populate_sysroot \
@@ -103,6 +105,7 @@ IMAGE_CMD_sunxi-sdimg () {
 	# Burn Partitions
 	dd if=${WORKDIR}/boot.img of=${SDIMG} conv=notrunc seek=1 bs=$(expr ${IMAGE_ROOTFS_ALIGNMENT} \* 1024)
 	# If SDIMG_ROOTFS_TYPE is a .xz file use xzcat
+
 	if echo "${SDIMG_ROOTFS_TYPE}" | egrep -q "*\.xz"
 	then
 		xzcat ${SDIMG_ROOTFS} | dd of=${SDIMG} conv=notrunc seek=1 bs=$(expr 1024 \* ${BOOT_SPACE_ALIGNED} + ${IMAGE_ROOTFS_ALIGNMENT} \* 1024)
@@ -114,6 +117,25 @@ IMAGE_CMD_sunxi-sdimg () {
 	SPL_FILE=$(basename ${SPL_BINARY})
 	dd if=${DEPLOY_DIR_IMAGE}/${SPL_FILE} of=${SDIMG} bs=1024 seek=8 conv=notrunc
 	ln -sr ${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.sunxi-sdimg.img ${IMGDEPLOYDIR}/sdimg
+	
+	# create norflash image for v3s NBv2
+	
+	mkdir ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}_rootfs
+
+	tar xf ${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.${ZIP_ROOTFS_TYPE} -C ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}_rootfs
+
+	mkfs.jffs2 -s 256 -e 0x1000 -p 0xAF0000 -d ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}_rootfs -o ${DEPLOY_DIR_IMAGE}/jffs2.img
+
+	dd if=/dev/zero of=${DEPLOY_DIR_IMAGE}/flashimg.bin bs=16M count=1
+
+	dd if=${DEPLOY_DIR_IMAGE}/u-boot-sunxi-with-spl.bin of=${DEPLOY_DIR_IMAGE}/flashimg.bin bs=1K conv=notrunc
+
+	dd if=${DEPLOY_DIR_IMAGE}/sun8i-v3s-licheepi-zero-dock.dtb of=${DEPLOY_DIR_IMAGE}/flashimg.bin bs=1K seek=1024  conv=notrunc
+
+	dd if=${DEPLOY_DIR_IMAGE}/zImage of=${DEPLOY_DIR_IMAGE}/flashimg.bin bs=1K seek=1088  conv=notrunc
+
+	dd if=${DEPLOY_DIR_IMAGE}/jffs2.img of=${DEPLOY_DIR_IMAGE}/flashimg.bin  bs=1K seek=5184 conv=notrunc && echo "done"
+	
 }
 
 # write uboot.itb for arm64 boards
