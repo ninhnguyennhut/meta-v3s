@@ -3,6 +3,8 @@ HOMEPAGE = "http://www.jumpnowtek.com"
 
 require console-image.bb
 
+inherit populate_sdk_qt5
+
 QT_DEV_TOOLS = " \
 "
 
@@ -61,8 +63,6 @@ IMAGE_INSTALL += " \
     ${FONTS} \
     ${QT_TOOLS} \
     qcolorcheck \
-    qfontchooser \
-    qkeytest \
     qshowfonts \
     ${TSLIB} \
     tspress \
