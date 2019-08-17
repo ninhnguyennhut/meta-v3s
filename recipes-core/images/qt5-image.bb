@@ -3,6 +3,8 @@ HOMEPAGE = "http://www.jumpnowtek.com"
 
 require console-image.bb
 
+inherit populate_sdk_qt5
+
 QT_DEV_TOOLS = " \
     qtbase-dev \
     qtbase-mkspecs \
