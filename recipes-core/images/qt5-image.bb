@@ -68,7 +68,6 @@ IMAGE_INSTALL += " \
     qkeytest \
     qshowfonts \
     ${TSLIB} \
-    tspress \
 "
 
 export IMAGE_BASENAME = "qt5-image"
