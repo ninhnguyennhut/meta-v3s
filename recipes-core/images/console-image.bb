@@ -90,6 +90,7 @@ EXTRA_TOOLS_INSTALL = " \
     wget \
     xz \
     zip \
+    minicom \
 "
 
 IMAGE_INSTALL += " \

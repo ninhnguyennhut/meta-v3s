@@ -61,6 +61,7 @@ TSLIB = " \
 
 IMAGE_INSTALL += " \
     ${FONTS} \
+    ${QT_DEV_TOOLS} \
     ${QT_TOOLS} \
     qcolorcheck \
     qfontchooser \

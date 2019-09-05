@@ -11,14 +11,14 @@ COMPATIBLE_MACHINE = "(v3s)"
 
 DEFAULT_PREFERENCE_v3s="1"
 
-SRC_URI = "git://git.denx.de/u-boot.git;branch=master \
-           file://boot.cmd \
-           "
+PV = "4.14.1"
+PR = "r0"
 
-SRCREV = "f95ab1fb6e37f0601f397091bb011edf7a98b890"
+SRCREV_pn-${PN} = "${AUTOREV}"
 
-PV = "v2018.03+git${SRCPV}"
-PE = "2"
+SRC_URI += "git://github.com/ninhnguyennhut/u-boot-4.14.x.git;protocol=https \
+	    file://boot.cmd \		
+	   "
 
 S = "${WORKDIR}/git"
 
