@@ -58,6 +58,7 @@ DEV_SDK_INSTALL = " \
     python3-modules \
     strace \
     mtd-utils \
+    libmosquittopp1 \
 "
 
 DEV_EXTRAS = " \
@@ -78,6 +79,8 @@ EXTRA_TOOLS_INSTALL = " \
     iptables \
     less \
     nano \
+    vim \
+    cronie \
     netcat \
     parted \
     procps \
@@ -91,6 +94,9 @@ EXTRA_TOOLS_INSTALL = " \
     xz \
     zip \
     minicom \
+    sudo \
+    mingetty \
+    llvm \
 "
 
 IMAGE_INSTALL += " \

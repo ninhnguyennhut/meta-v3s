@@ -15,7 +15,6 @@ qtdeclarative \
 qtdeclarative-tools \
 qtdeclarative-mkspecs \
 qtdeclarative-qmlplugins \
-qttranslations-qtdeclarative \
 qtmultimedia \
 qtmultimedia-plugins \
 qtsvg \
@@ -38,6 +37,12 @@ qttranslations-qtxmlpatterns \
 qtquickcontrols2 \
 qtquickcontrols2-dev \
 qtquickcontrols2-mkspecs \
+qtvirtualkeyboard \
+qtvirtualkeyboard-dev \
+qtxmlpatterns \
+qtxmlpatterns-dev \
+qtxmlpatterns-mkspecs \ 
+qtcharts \
 "
 
 QT_TOOLS = " \
@@ -69,5 +74,19 @@ IMAGE_INSTALL += " \
     qshowfonts \
     ${TSLIB} \
 "
+
+
+#my_postprocess_function() {
+	
+#   /home/nbv2/SmartHome
+#}
+
+#ROOTFS_POSTPROCESS_COMMAND_append = " \
+#  my_postprocess_function; \
+#"
+
+
+
+
 
 export IMAGE_BASENAME = "qt5-image"
