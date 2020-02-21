@@ -122,7 +122,7 @@ IMAGE_CMD_sunxi-sdimg () {
 	
 	mkdir ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}_rootfs
 
-	tar xf ${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.${ZIP_ROOTFS_TYPE} -C ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}_rootfs
+	tar -xf ${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.${ZIP_ROOTFS_TYPE} -C ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}_rootfs
 
 	mkfs.jffs2 -s 256 -e 0x1000 -p 0xAF0000 -d ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}_rootfs -o ${DEPLOY_DIR_IMAGE}/jffs2.img
 
